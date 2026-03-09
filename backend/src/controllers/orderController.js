@@ -26,13 +26,11 @@ export default class OrderController {
                 valorTotal: orderData.valorTotal,
                 dataCriacao: orderData.dataCriacao,
 
-                items: orderData.items.map(item => ({
+                items: (orderData.items || []).map(item => ({ //EVITA ERRO SE ITEMS NÃO VIER
                     productId: item.productId,
                     quantity: item.quantity,
                     price: item.price
-                })),
-
-                
+                }))
             }
 
             const result = await this.dao.addOrder(order)
